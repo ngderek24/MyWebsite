@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>World Clock</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+<body>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="js/bootstrap.min.js"></script>
+
+  <h3>World Clock</h3>
+  <li class="divider"></li>
+  <p>Select a major city near your area for the time:</p>
+  <!-- <form onsubmit="return setTime();" action="<?php echo $_SERVER['PHP_SELF'];?>" method="get" class="dropdown" role="form">
+    <select name="city" class="form-control" id="city">
+      <option value="Baghdad">Baghdad</option>
+      <option value="Bangkok">Bangkok</option>
+      <option value="Beirut">Beirut</option>
+      <option value="Chicago">Chicago</option>
+      <option value="Damascus">Damascus</option>
+      <option value="Dubai">Dubai</option>
+      <option value="Gaza">Gaza</option>
+      <option value="Ho Chi Minh">Ho Chi Minh</option>
+      <option value="Hong Kong">Hong Kong</option>
+      <option value="Istanbul">Istanbul</option>
+      <option value="Jakarta">Jakarta</option>
+      <option value="Jerusalem">Jerusalem</option>
+      <option value="Kabul">Kabul</option>
+      <option value="Kuala Lumpur">Kuala Lumpur</option>
+      <option value="Los Angeles">Los Angeles</option>
+      <option value="Macau">Macau</option>
+      <option value="Manila">Manila</option>
+      <option value="New York">New York</option>
+      <option value="Phnom Penh">Phnom Penh</option>
+      <option value="Pyongyang">Pyongyang</option>
+      <option value="Qatar">Qatar</option>
+      <option value="Seoul">Seoul</option>
+      <option value="Shanghai">Shanghai</option>
+      <option value="Singapore">Singapore</option>
+      <option value="Taipei">Taipei</option>
+      <option value="Tehran">Tehran</option>
+      <option value="Tokyo">Tokyo</option>
+    </select>
+    <input type="submit" value="Get Time">
+  </form>
+  -->
+
+  <table border="0" width="200" cellspacing="0" cellpadding="3">
+<form name="where">
+  <tr>
+    <td width="100%">
+<select name="city" size="1" onchange="updateclock(this);"> 
+<option value="" selected>Local time</option>
+<option value="0">London GMT</option> 
+<option value="1">Rome</option>
+<option value="7">Bangkok</option>
+<option value="8">Hong Kong</option>
+<option value="9">Tokyo</option> 
+<option value="10">Sydney</option>
+<option value="12">Fiji</option>
+<option value="-10">Hawaii</option>
+<option value="-8">San Francisco</option> 
+<option value="-4">New York</option>
+<option value="-3">Buenos Aires</option>
+</select>
+
+</td>
+  </tr>
+  <tr>
+    <td width="100%">
+<script language="JavaScript">
+
+/*
+Drop Down World Clock- By JavaScript Kit (http://www.javascriptkit.com)
+Portions of code by Kurt @ http://www.btinternet.com/~kurt.grigg/javascript
+This credit notice must stay intact
+*/
+
+if (document.all||document.getElementById)
+document.write('<br><strong>The time is </strong><span id="worldclock" style="font:bold 16px Arial;"></span><br />')
+
+zone=0;
+isitlocal=true;
+ampm='';
+
+function updateclock(z){
+zone=z.options[z.selectedIndex].value;
+isitlocal=(z.options[0].selected)?true:false;
+}
+
+function WorldClock(){
+now=new Date();
+ofst=now.getTimezoneOffset()/60;
+secs=now.getSeconds();
+sec=-1.57+Math.PI*secs/30;
+mins=now.getMinutes();
+min=-1.57+Math.PI*mins/30;
+hr=(isitlocal)?now.getHours():(now.getHours() + parseInt(ofst)) + parseInt(zone);
+hrs=-1.575+Math.PI*hr/6+Math.PI*parseInt(now.getMinutes())/360;
+if (hr < 0) hr+=24;
+if (hr > 23) hr-=24;
+ampm = (hr > 11)?"PM":"AM";
+statusampm = ampm.toLowerCase();
+
+hr2 = hr;
+if (hr2 == 0) hr2=12;
+(hr2 < 13)?hr2:hr2 %= 12;
+if (hr2<10) hr2="0"+hr2
+
+var finaltime=hr2+':'+((mins < 10)?"0"+mins:mins)+':'+((secs < 10)?"0"+secs:secs)+' '+statusampm;
+
+if (document.all)
+worldclock.innerHTML=finaltime
+else if (document.getElementById)
+document.getElementById("worldclock").innerHTML=finaltime
+else if (document.layers){
+document.worldclockns.document.worldclockns2.document.write(finaltime)
+document.worldclockns.document.worldclockns2.document.close()
+}
+
+
+setTimeout('WorldClock()',1000);
+}
+
+window.onload=WorldClock
+//-->
+</script>
+
+<!--Place holder for NS4 only-->
+<ilayer id="worldclockns" width=100% height=35><layer id="worldclockns2" width=100% height=35 left=0 top=0 style="font:bold 16px Arial;"></layer></ilayer>
+</td>
+</form>
+  </tr>
+</table>  
+ 
+</body>
+</html>
