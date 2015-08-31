@@ -74,6 +74,15 @@
       </div>
       <div class="oneproj">
         <div class="view fifth-effect">  
+          <a href="http://github.com/tincan24/Steganography"><img src="images/stegano.jpg" /></a>  
+          <div class="mask"></div>  
+        </div>
+        <h1 class="projtitle">Steganography</h1>
+        <p class="projinfo">Summer 2015<br>Languages: Java</p>
+        <p class="projdesc">Steganography is a desktop application built with Eclipse Windows Builder. It allows the user to hide secret messages within an png image and also retrieve hidden messages and output them to a text file. This technique is done through bit manipulation of the RGB values of the pixels in the image.</p>
+      </div>
+      <div class="oneproj">
+        <div class="view fifth-effect">  
           <a href="http://www.youtube.com/watch?v=7BX0lQUwj4Q"><img src="images/interviewPDF.png" /></a>  
           <div class="mask"></div>  
         </div>
@@ -121,7 +130,7 @@
 
     <center id="contact">
       <div class="icon">
-        <a href="#"><img src="images/mail.png" class="img-circle" width="25" height="25" id="mail"></a>
+        <a href="contact.html"><img src="images/mail.png" class="img-circle" width="25" height="25" id="mail"></a>
         <a href="http://www.github.com/tincan24"><img src="images/github.png" class="img-circle" width="25" height="25" id="github"></a>
         <a href="http://www.linkedin.com/in/dereknguyen24"><img src="images/linkedin.png" class="img-circle" width="27" height="27" id="linkedin"></a>
         <a href="http://www.youtube.com/user/24tincan/videos"><img src="images/youtube.png" class="img-circle" width="26" height="26"></a>
