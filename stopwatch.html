@@ -32,16 +32,18 @@
           <ul class="dropdown-menu">
             <li><a href="http://localhost/BMI.php">BMI Calculator</a></li>
             <li><a href="WClock.html">World Clock</a></li>
+            <li><a href="stopwatch.html">Stopwatch</a></li>
           </ul>
       </li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
 
     <div id="stopwatch">
-      <span id="time"></span><br>
-      <input type="button" value="Start" onclick="startClock();">
-      <input type="button" value="Stop" onclick="stopClock();">
-      <input type="button" value="Reset" onclick="resetClock();">
+      <div id="timeDiv">
+        <span id="time"></span>
+      </div>
+      <button id="startBtn" type="button" class="btn btn-success">Start</button>
+      <button id="resetBtn" type="button" class="btn btn-warning" onclick="resetClock();">Reset</button>
     </div>
 
     <script>
@@ -132,7 +134,44 @@
 
       $(document).ready(function(){
         showTime();
-      })
+      });
+
+      // toggle text and functionality of start/stop button
+      $('#startBtn').click(function(){
+        var startBtn = document.getElementById('startBtn');
+        if(startBtn.innerHTML == "Start"){
+          startClock();
+          startBtn.innerHTML = "Stop";
+          $('#startBtn').removeClass("btn-success");
+          $('#startBtn').addClass("btn-danger");
+        }
+        else if(startBtn.innerHTML == "Stop"){
+          stopClock();
+          startBtn.innerHTML = "Start";
+          $('#startBtn').removeClass("btn-danger");
+          $('#startBtn').addClass("btn-success");
+        }
+      });
+
+      // start/stop clock with spacebar
+      $(document).keydown(function(e){
+        var key = e.which;
+        if(key == "32"){
+          var startBtn = document.getElementById('startBtn');
+          if(startBtn.innerHTML == "Start"){
+            startClock();
+            startBtn.innerHTML = "Stop";
+            $('#startBtn').removeClass("btn-success");
+            $('#startBtn').addClass("btn-danger");
+          }
+          else if(startBtn.innerHTML == "Stop"){
+            stopClock();
+            startBtn.innerHTML = "Start";
+            $('#startBtn').removeClass("btn-danger");
+            $('#startBtn').addClass("btn-success");
+          }
+        }
+      });
     </script>
 
     <center id="contact">
