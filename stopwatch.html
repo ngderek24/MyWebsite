@@ -14,7 +14,7 @@
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
-  <body onload="showTime();">
+  <body>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -38,12 +38,53 @@
     </ul>
 
     <div id="stopwatch">
-      <span id="time">hello</span><br>
-      <input type="button" value="Start">
+      <span id="time"></span><br>
+      <input type="button" value="Start" onclick="startClock();">
+      <input type="button" value="Stop" onclick="stopClock();">
+      <input type="button" value="Reset" onclick="resetClock();">
     </div>
 
     <script>
-      var time = document.getElementById('time');
+      var Stopwatch = function(){
+        // time of last start (0 if paused)
+        var startTime = 0;
+
+        // ms of time when clock was last stopped
+        var recentStop = 0;
+
+        var curTime = function(){
+          var d = new Date();
+          return d.getTime();
+        }
+
+        // Public methods
+        this.start = function(){
+          if(!startTime)
+            startTime = curTime();
+        }
+
+        this.time = function(){
+          if(startTime)
+            return recentStop + curTime() - startTime;
+          else
+            return recentStop;
+        }
+
+        this.stop = function(){
+          if(startTime)
+            recentStop = recentStop + curTime() - startTime;
+          startTime = 0;
+        }
+
+        this.reset = function(){
+          recentStop = 0;
+          startTime = 0;
+        }
+      }
+
+      var time;
+      var watch = new Stopwatch();
+      var clockInterval;
 
       function padZeros(num, len){
         var s = "00" + num;
@@ -53,17 +94,45 @@
       function formatTime(time){
         var m = 0;
         var s = 0;
-        var cs = 0;
+        var ms = 0;
 
-        
+        m = Math.floor(time/(60*1000));
+        time = time % (60*1000);
+        s = Math.floor(time/1000);
+        ms = time%1000;
 
-        var formattedTime = padZeros(m, 2) + ':' + padZeros(s, 2) + ':' + padZeros(cs, 2);
+        var formattedTime = padZeros(m, 2) + ':' + padZeros(s, 2) + ':' + padZeros(ms, 3);
         return formattedTime;
       }
 
       function showTime(){
-        time.innerHTML = "00:00:00";
+        time = document.getElementById('time');
+        updateTime();
       }
+
+      function updateTime(){
+        time.innerHTML = formatTime(watch.time());
+      }
+
+      function startClock(){
+        clockInterval = setInterval(updateTime, 1);
+        watch.start();
+      }
+
+      function stopClock(){
+        watch.stop();
+        clearInterval(clockInterval);
+      }
+
+      function resetClock(){
+        stopClock();
+        watch.reset();
+        updateTime();
+      }
+
+      $(document).ready(function(){
+        showTime();
+      })
     </script>
 
     <center id="contact">
