@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    
+    <title>Derek Nguyen</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+  </head>
+  <body onload="showTime();">
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <center>
+      <img src="images/nametitle.png" class="img-rounded titleimage" alt="Cinque Terre" width="500" height="200" style="position:relative; top:50px">
+    </center>
+
+    <ul class="nav nav-pills navbar-custom">
+      <li><a href="home.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li class="dropdown active">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tools</a>
+          <ul class="dropdown-menu">
+            <li><a href="http://localhost/BMI.php">BMI Calculator</a></li>
+            <li><a href="WClock.html">World Clock</a></li>
+          </ul>
+      </li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <div id="stopwatch">
+      <span id="time">hello</span><br>
+      <input type="button" value="Start">
+    </div>
+
+    <script>
+      var time = document.getElementById('time');
+
+      function padZeros(num, len){
+        var s = "00" + num;
+        return s.substr(s.length - len);
+      }
+
+      function formatTime(time){
+        var m = 0;
+        var s = 0;
+        var cs = 0;
+
+        
+
+        var formattedTime = padZeros(m, 2) + ':' + padZeros(s, 2) + ':' + padZeros(cs, 2);
+        return formattedTime;
+      }
+
+      function showTime(){
+        time.innerHTML = "00:00:00";
+      }
+    </script>
+
+    <center id="contact">
+      <div class="icon">
+        <a href="contact.html"><img src="images/mail.png" class="img-circle" width="25" height="25" id="mail"></a>
+        <a href="http://www.github.com/tincan24"><img src="images/github.png" class="img-circle" width="25" height="25" id="github"></a>
+        <a href="http://www.linkedin.com/in/dereknguyen24"><img src="images/linkedin.png" class="img-circle" width="27" height="27" id="linkedin"></a>
+        <a href="http://www.youtube.com/user/24tincan/videos"><img src="images/youtube.png" class="img-circle" width="26" height="26"></a>
+      </div>
+      <p id="contactmsg">ngderek24@gmail.com<br>Get in touch and check out my work!<br>&copy Derek Nguyen 2015. All rights reserved.</p>
+    </center>
+  </body>
+</html>
