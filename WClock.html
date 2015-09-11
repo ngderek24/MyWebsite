@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    
+    <title>World Clock</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+  </head>
+<body>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="js/bootstrap.min.js"></script>
+
+  <center>
+    <img src="images/nametitle.png" class="img-rounded titleimage" alt="Cinque Terre" width="500" height="200" style="position:relative; top:50px">
+  </center>
+
+  <ul class="nav nav-pills navbar-custom">
+    <li><a href="home.html">About</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li class="dropdown active">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tools</a>
+        <ul class="dropdown-menu">
+          <li><a href="http://localhost/BMI.php">BMI Calculator</a></li>
+          <li><a href="WClock.html">World Clock</a></li>
+          <li><a href="stopwatch.html">Stopwatch</a></li>
+        </ul>
+    </li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+
+  <center class="wclock">
+    <h3 id="wclocktitle">World Clock</h3>
+    <li class="divider"></li>
+    <p id="instr">Select a major city near your area for the time:</p>
+    <div id="selectmenu">   
+      <select name="city" size="1" onchange="updateTime(this);" class="form-control"> 
+        <option value="" selected>Local time</option>
+        <option value="2">Amsterdam</option>
+        <option value="3">Ankara</option>
+        <option value="3">Athens</option>
+        <option value="3">Baghdad</option>
+        <option value="7">Bangkok</option>
+        <option value="8">Beijing</option>
+        <option value="2">Berlin</option>
+        <option value="-5">Bogota</option>
+        <option value="2">Brussels</option>
+        <option value="2">Budapest</option>
+        <option value="-3">Buenos Aires</option>
+        <option value="2">Cairo</option>
+        <option value="-5">Chicago</option>
+        <option value="3">Damascus</option>
+        <option value="1">Dublin</option>
+        <option value="3">Helsinki</option>
+        <option value="7">Ho Chi Minh</option>
+        <option value="8">Hong Kong</option>
+        <option value="-10">Honolulu</option>
+        <option value="-5">Houston</option>
+        <option value="3">Istanbul</option>
+        <option value="7">Jakarta</option>
+        <option value="3">Jerusalem</option>
+        <option value="5">Karachi</option>
+        <option value="-5">Lima</option>
+        <option value="1">Lisbon</option>
+        <option value="0">London</option>
+        <option value="-7">Los Angeles</option>
+        <option value="2">Madrid</option>
+        <option value="8">Manila</option>
+        <option value="-5">Mexico City</option>
+        <option value="3">Moscow</option>
+        <option value="-4">New York</option>
+        <option value="2">Oslo</option>
+        <option value="2">Paris</option>
+        <option value="2">Prague</option>
+        <option value="9">Pyongyang</option>
+        <option value="-3">Rio de Janeiro</option> 
+        <option value="2">Rome</option>
+        <option value="-7">San Francisco</option>
+        <option value="-3">Santiago</option>
+        <option value="-3">Sao Paolo</option>
+        <option value="9">Seoul</option>
+        <option value="8">Shanghai</option>
+        <option value="8">Singapore</option>
+        <option value="2">Stockholm</option>
+        <option value="10">Sydney</option>
+        <option value="8">Taipei</option>
+        <option value="9">Tokyo</option> 
+        <option value="-4">Washington D.C.</option>
+      </select>
+      
+      <script type="text/javascript">
+        if(document.getElementById)
+          document.write('<br><strong id="timeis">The time is </strong><span id="worldclock"></span><br/>')
+
+        isLocal = true;
+        amOrPm = '';
+        zone = 0;
+
+        function updateTime(where){
+          zone = where.options[where.selectedIndex].value;
+          if(where.options[0].selected)
+            isLocal = true;
+          else
+            isLocal = false;
+        }
+
+        function GetTime(){
+          now = new Date();
+          hrOffset = now.getTimezoneOffset()/60;
+          second = now.getSeconds();
+          minute = now.getMinutes();
+          hour = now.getHours();
+
+          if(!isLocal)
+            hour += parseInt(hrOffset) + parseInt(zone);
+          if(hour > 23) 
+            hour -= 24;
+          if(hour < 0) 
+            hour += 24;
+          if(hour > 11)
+            amOrPm = "PM";
+          else
+            amOrPm = "AM";
+
+          hr_12 = hour;
+          if(hr_12 == 0)
+            hr_12 = 12;
+          if(hr_12 > 12)
+            hr_12 %= 12;
+
+          if(hr_12 < 10)
+            hr_12 = "0"+hr_12;
+          if(minute < 10)
+            minute = "0"+minute;
+          if(second < 10)
+            second = "0"+second;
+
+          var time = hr_12+':'+minute+':'+second+' '+amOrPm;
+
+          if(document.all)
+            worldclock.innerHTML = time;
+          else if(document.getElementById)
+            document.getElementById("worldclock").innerHTML = time;
+          else if(document.layers){
+            document.worldclockns.document.worldclockns2.document.write(time);
+            document.worldclockns.document.worldclockns2.document.close();
+          }
+
+          setTimeout('GetTime()',1000);
+        }
+        window.onload=GetTime;
+      </script>
+    </div>
+  </center>
+
+  <center id="contact">
+    <div class="icon">
+      <a href="contact.html"><img src="images/mail.png" class="img-circle" width="25" height="25" id="mail"></a>
+      <a href="http://www.github.com/tincan24"><img src="images/github.png" class="img-circle" width="25" height="25" id="github"></a>
+      <a href="http://www.linkedin.com/in/dereknguyen24"><img src="images/linkedin.png" class="img-circle" width="27" height="27" id="linkedin"></a>
+      <a href="http://www.youtube.com/user/24tincan/videos"><img src="images/youtube.png" class="img-circle" width="26" height="26"></a>
+    </div>
+    <p id="contactmsg">ngderek24@gmail.com<br>Get in touch and check out my work!<br>&copy Derek Nguyen 2015. All rights reserved.</p>
+  </center>
+</body>
+</html>
